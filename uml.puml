@@ -1,7 +1,7 @@
 
 '''plantum
 @startuml
-
+scale 4.0
 class Plant {
     String name
     double moistureRequirement

@@ -146,7 +146,7 @@ To control the sensors and sprinlkers in effectively in this system
 
 
 ### Detailed Design Of Server
-!![alt text](image-1.png)
+![alt text](image-2.png)
 
 #### Interactions:
 - Data Flow : The Sensor reads real-time environmental data and transmit it to the CentralControlServer, the CentralControlServer then processes the SensorData received, referencing the Plant or Tree database to check if the moisture levels and environmental factors meet the requiremnts for each plant or tree in the sensor's proximity. Based on the analysis, the CentralControlServer sends commands to the Sprinkler class to adjust the flow rate to maintain optimal moisture level. 
