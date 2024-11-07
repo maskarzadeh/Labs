@@ -1,0 +1,87 @@
+
+'''plantum
+@startuml
+
+class Plant {
+    String name
+    double moistureRequirement
+    double sunlightRequirement
+    double temperatureRangeMin
+    double temperatureRangeMax
+    double humidityTolerance
+    int age
+
+    boolean checkMoistureLevel(double currentMoisture)
+    boolean checkSunlight(double currentSunlight)
+    boolean checkTemperature(double currentTemperature)
+    boolean checkHumidity(double currentHumidity)
+}
+
+class Tree extends Plant {
+    double soilAcidityRequirement
+
+    boolean checkSoilAcidity(double currentAcidity)
+}
+
+class Sensor {
+    double currentMoisture
+    double currentTemperature
+    double currentHumidity
+    double currentSunlight
+    String[] nearbyPlants
+
+    void readSensorData()
+    void transmitDataToServer()
+}
+
+class Sprinkler {
+    int id
+    double flowRate
+    boolean isActive
+
+    void adjustFlowRate(double newFlowRate)
+    void activate()
+    void deactivate()
+}
+
+class CentralControlServer {
+    List<Plant> plantDatabase
+    Map<Integer, Sensor> sensors
+    Map<Integer, Sprinkler> sprinklers
+    Queue<SensorData> dataQueue
+
+    void receiveData(SensorData data)
+    void analyzeDataAndControlSprinklers()
+    void updatePlantDatabase()
+    void sendCommandToSprinkler(int sprinklerId, double flowRate)
+}
+
+class SensorData {
+    int sensorId
+    double moistureLevel
+    double temperature
+    double humidity
+    double sunlight
+
+    SensorData(int sensorId, double moisture, double temperature, double humidity, double sunlight)
+}
+
+class NetworkingModule {
+    void handleTransmission(SensorData data, CentralControlServer server)
+    void handleCommandSignals(CentralControlServer server, Sprinkler sprinkler)
+}
+
+' Specify interactions
+
+SensorData --> CentralControlServer : "Transmit sensor data"
+CentralControlServer --> Sprinkler : "Send control commands"
+CentralControlServer --> Plant : "Analyze and check requirements"
+Sensor --> CentralControlServer : "Transmit data"
+Sprinkler --> CentralControlServer : "Receive commands"
+Tree --|> Plant : "Inherits attributes and methods"
+NetworkingModule --> CentralControlServer : "Handle transmission and command signals"
+NetworkingModule <--> Sensor : "Transmit data via RESTAPI"
+NetworkingModule <--> Sprinkler : "Send command signals via RESTAPI"
+
+@enduml
+
