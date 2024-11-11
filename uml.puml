@@ -1,5 +1,3 @@
-
-'''plantum
 @startuml
 scale 4.0
 class Plant {
@@ -72,16 +70,14 @@ class NetworkingModule {
 }
 
 ' Specify interactions
-
 SensorData --> CentralControlServer : "Transmit sensor data"
 CentralControlServer --> Sprinkler : "Send control commands"
-CentralControlServer --> Plant : "Analyze and check requirements"
-Sensor --> CentralControlServer : "Transmit data"
-Sprinkler --> CentralControlServer : "Receive commands"
+CentralControlServer --> Plant : "Analyze and fetch plant requirements"
+Sensor --> CentralControlServer : "Transmit data via REST API"
+Sprinkler --> CentralControlServer : "Receive control commands"
 Tree --|> Plant : "Inherits attributes and methods"
-NetworkingModule --> CentralControlServer : "Handle transmission and command signals"
-NetworkingModule <--> Sensor : "Transmit data via RESTAPI"
-NetworkingModule <--> Sprinkler : "Send command signals via RESTAPI"
+NetworkingModule --> CentralControlServer : "Manage REST API data exchange"
+NetworkingModule <--> Sensor : "Transmit data via REST API"
+NetworkingModule <--> Sprinkler : "Send command signals via REST API"
 
 @enduml
-
